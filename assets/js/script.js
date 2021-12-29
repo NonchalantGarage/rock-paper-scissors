@@ -16,8 +16,22 @@ startBtn.innerHTML = "Best 2 of 3";
 startBtn.classList.add("btn","btn-dark","btn-lg","btn-block");
 bestOf3.appendChild(startBtn);
 
-// array of choices
-var choices = ['rock','paper','scissors']
+// Enemy OBJ choices
+var enemy = {
+    choices: ['rock','paper','scissors'] ,
+    randomChoice: []
+};
+
+console.log(enemy.randomChoice);
+
+var getRandomChoice = () => {
+    return Math.floor(Math.random() * 3);
+}
+
+for (var i = 0; i < 3; i++) {
+    getRandomChoice();
+    enemy.randomChoice.push(i);
+}
 
 // Player gets three options to choose from 
 // function to append player choice and use math random to choose enemy choice
