@@ -8,7 +8,7 @@ var bestOf3 = document.querySelector("#best-of-3")
 
 // Opening message to init game 
 var openingMessage = document.createElement("span");
-openingMessage.innerHTML= "Welcome to Nonchalant Rock Paper Scissors, where you play to play. Not play to win";
+openingMessage.innerHTML= "Settle the score with classic roshambo";
 messageEl.appendChild(openingMessage);
 
 var startBtn = document.createElement("button");
@@ -24,9 +24,24 @@ var enemy = {
 var randomChoice = enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
 
 
-
 console.log(randomChoice);
 
+
+var startGame = event => {
+    console.log(event);
+}    
+
+
+bestOf3.addEventListener('click',startGame)
+// switch() statment 
+// Enemey
+    // rock > scissors
+    // paper > rock
+    // scissors > paper
+// Player
+    // rock > scissors
+    // paper > rock
+    // scissors > paper
 // Player gets three options to choose from 
 // function to append player choice and use math random to choose enemy choice
 
