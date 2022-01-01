@@ -31,7 +31,6 @@ var startGame = event => {
     console.log(event);
 }    
 
-
 bestOf3.addEventListener('click',startGame)
 // switch() statment 
 // Enemey
