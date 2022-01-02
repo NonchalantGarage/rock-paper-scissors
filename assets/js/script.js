@@ -8,10 +8,15 @@ var rockSelectEl = document.querySelector('#rock')
 var paperSelectEl = document.querySelector('#paper')
 var scissorsSelectEl = document.querySelector('#scissors')
 
+var messages = {
+    default: "Settle the score with classic roshambo",
+    choose: "Choose your weapon"
+}
+
 // Opening message to init game 
-var openingMessage = document.createElement("span");
-openingMessage.innerHTML= "Settle the score with classic roshambo";
-messageEl.appendChild(openingMessage);
+var currentMessage = document.createElement("span");
+currentMessage.innerHTML= messages.default;
+messageEl.appendChild(currentMessage);
 
 var startBtn = document.createElement("button");
 startBtn.innerHTML = "Best 2 of 3";
@@ -32,6 +37,8 @@ console.log(randomChoice);
 var startGame = event => {
     bestOf3.innerHTML = ""
 
+    currentMessage.innerHTML= messages.choose;
+
     var rock = document.createElement('img');
     rock.setAttribute('src', './assets/images/rock.png');
     rockSelectEl.appendChild(rock);
@@ -47,8 +54,6 @@ var startGame = event => {
     scissors.setAttribute('src', './assets/images/scissors.png');
     scissorsSelectEl.appendChild(scissors);
     scissors.addEventListener('click',function(){(console.log('clicked scissors'))});
-
-    
 }    
 
 bestOf3.addEventListener('click',startGame)
