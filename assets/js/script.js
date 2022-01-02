@@ -4,7 +4,9 @@ var messageEl = document.querySelector("#message")
 var playerChoiceEl = document.querySelector("#player-choice")
 var enemyChoiceEl = document.querySelector("#enemy-choice")
 var bestOf3 = document.querySelector("#best-of-3")
-
+var rockSelectEl = document.querySelector('#rock')
+var paperSelectEl = document.querySelector('#paper')
+var scissorsSelectEl = document.querySelector('#scissors')
 
 // Opening message to init game 
 var openingMessage = document.createElement("span");
@@ -28,7 +30,25 @@ console.log(randomChoice);
 
 
 var startGame = event => {
-    console.log(event);
+    bestOf3.innerHTML = ""
+
+    var rock = document.createElement('img');
+    rock.setAttribute('src', './assets/images/rock.png');
+    rockSelectEl.appendChild(rock);
+    rock.addEventListener('click',function(){(console.log('clicked rock'))});
+
+    var paper = document.createElement('img');
+    paper.setAttribute('src', './assets/images/paper.png');
+    paperSelectEl.appendChild(paper);
+    paper.addEventListener('click',function(){(console.log('clicked paper'))});
+
+
+    var scissors = document.createElement('img');
+    scissors.setAttribute('src', './assets/images/scissors.png');
+    scissorsSelectEl.appendChild(scissors);
+    scissors.addEventListener('click',function(){(console.log('clicked scissors'))});
+
+    
 }    
 
 bestOf3.addEventListener('click',startGame)
