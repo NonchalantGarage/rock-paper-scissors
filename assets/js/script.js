@@ -13,6 +13,7 @@ var enemyImgChoice = document.createElement('img');
 var messages = {
     default: "Settle the score with classic roshambo",
     choose: "Choose your weapon",
+    draw: "It's a draw. Try again",
     rockWins: "Rock busts scissors",
     paperWins: "Paper consumes rock",
     scissorsWin: "Scissors cut paper",
