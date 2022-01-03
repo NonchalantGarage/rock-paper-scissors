@@ -10,6 +10,8 @@ var scissorsSelectEl = document.querySelector('#scissors')
 var enemyImgChoice = document.createElement('img');
 
 
+
+
 var messages = {
     default: "Settle the score with classic roshambo",
     choose: "Choose your weapon",
@@ -32,33 +34,46 @@ bestOf3.appendChild(startBtn);
 // Enemy OBJ choices
 var enemy = {
     choices: ['rock','paper','scissors'] ,
+    Bestof3Arr: []
 };
+
 
 var randomChoice = enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
 
+for (var i =0; i < enemy.choices.length; i++)
+    enemy.Bestof3Arr.push[i]
+
+    
+console.log(enemy.Bestof3Arr)
 console.log(randomChoice);
 
 var enemyImg = "./assets/images/" + randomChoice + ".png";
 enemyImgChoice.setAttribute('src', enemyImg);
 
 
+var rock = document.createElement('img');
+rock.setAttribute('src', './assets/images/rock.png');
+
+
+var pickRock = function(){
+
+    playerChoiceEl.appendChild(rock);
+    rockSelectEl.innerHTML = ''
+    paperSelectEl.innerHTML = ''
+    scissorsSelectEl.innerHTML = ''
+    
+    enemyChoiceEl.appendChild(enemyImgChoice);
+}
 
 var startGame = event => {
     bestOf3.innerHTML = ""
 
     currentMessage.innerHTML= messages.choose;
 
-    var rock = document.createElement('img');
-    rock.setAttribute('src', './assets/images/rock.png');
+    // var rock = document.createElement('img');
+    // rock.setAttribute('src', './assets/images/rock.png');
     rockSelectEl.appendChild(rock);
-    rock.addEventListener('click',function(){
-        playerChoiceEl.appendChild(rock);
-        rockSelectEl.innerHTML = ''
-        paperSelectEl.innerHTML = ''
-        scissorsSelectEl.innerHTML = ''
-        
-        enemyChoiceEl.appendChild(enemyImgChoice);
-    });
+    rock.addEventListener('click',pickRock);
 
     var paper = document.createElement('img');
     paper.setAttribute('src', './assets/images/paper.png');
