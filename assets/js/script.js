@@ -33,9 +33,8 @@ var enemy = {
 };
 
 
-var randomChoice = function(){
-    return enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
-} 
+var randomChoice = enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
+
 
 
 for (var i =0; i < enemy.choices.length; i++)
@@ -43,9 +42,9 @@ for (var i =0; i < enemy.choices.length; i++)
 
     
 console.log(enemy.Bestof3Arr)
-console.log(randomChoice());
+console.log(randomChoice);
 
-var enemyImg = "./assets/images/" + randomChoice() + ".png";
+var enemyImg = "./assets/images/" + randomChoice + ".png";
 enemyImgChoice.setAttribute('src', enemyImg);
 
 
@@ -61,6 +60,7 @@ paper.setAttribute('src', './assets/images/paper.png');
 var scissors = document.createElement('img');
 scissors.setAttribute('src', './assets/images/scissors.png');
 
+
 var pickRock = function(){
     
     playerChoiceEl.appendChild(rock);
@@ -69,13 +69,17 @@ var pickRock = function(){
     scissorsSelectEl.innerHTML = ''
     
     enemyChoiceEl.appendChild(enemyImgChoice);
-
-    evaluateResult(rock.getAttribute('id'),'paper');
+    enemyImgChoice.setAttribute('id',randomChoice);
     
+    console.log(enemyImgChoice.getAttribute('id'));
+
+    evaluateResult(rock.getAttribute('id'),enemyImgChoice.getAttribute('id'));
 
 
     // run function to evaluate and push result to array
 }
+
+console.log(randomChoice);
 var pickPaper = function(){
 
     playerChoiceEl.appendChild(paper);
