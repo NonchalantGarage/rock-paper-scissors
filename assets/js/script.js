@@ -45,12 +45,9 @@ for (var i =0; i < enemy.choices.length; i++)
 console.log(enemy.Bestof3Arr)
 console.log(randomChoice());
 
-
 var enemyImg = "./assets/images/" + randomChoice() + ".png";
 enemyImgChoice.setAttribute('src', enemyImg);
-enemyImg.setAttribute('id',randomChoice());
 
-console.log(enemyImgChoice.getAttribute('id'));
 
 var rock = document.createElement('img');
 rock.setAttribute('src', './assets/images/rock.png');
@@ -73,9 +70,8 @@ var pickRock = function(){
     
     enemyChoiceEl.appendChild(enemyImgChoice);
 
-    evaluateResult(rock.getAttribute('id'),enemyChoiceEl.getAttribute('id'));
+    evaluateResult(rock.getAttribute('id'),'paper');
     
-    console.log(enemyImg.getAttribute('id'));
 
 
     // run function to evaluate and push result to array
@@ -129,7 +125,9 @@ var startGame = event => {
 var evaluateResult = function (playerSelection, enemySelection) {
     if (playerSelection === enemySelection) {
         console.log("draw")
-    };
+    } else {
+        console.log('evaluate')
+    }
 };
 
 
