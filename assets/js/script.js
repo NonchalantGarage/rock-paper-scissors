@@ -1,5 +1,3 @@
-// Query Selectors for HTML elements to append to
-
 var messageEl = document.querySelector("#message")
 var playerChoiceEl = document.querySelector("#player-choice")
 var enemyChoiceEl = document.querySelector("#enemy-choice")
@@ -8,9 +6,6 @@ var rockSelectEl = document.querySelector('#rock')
 var paperSelectEl = document.querySelector('#paper')
 var scissorsSelectEl = document.querySelector('#scissors')
 var enemyImgChoice = document.createElement('img');
-
-
-
 
 var messages = {
     default: "Settle the score with classic roshambo",
@@ -38,31 +33,74 @@ var enemy = {
 };
 
 
-var randomChoice = enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
+var randomChoice = function(){
+    return enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
+} 
+
 
 for (var i =0; i < enemy.choices.length; i++)
     enemy.Bestof3Arr.push[i]
 
     
 console.log(enemy.Bestof3Arr)
-console.log(randomChoice);
+console.log(randomChoice());
 
-var enemyImg = "./assets/images/" + randomChoice + ".png";
+
+var enemyImg = "./assets/images/" + randomChoice() + ".png";
 enemyImgChoice.setAttribute('src', enemyImg);
+enemyImg.setAttribute('id',randomChoice());
 
+console.log(enemyImgChoice.getAttribute('id'));
 
 var rock = document.createElement('img');
 rock.setAttribute('src', './assets/images/rock.png');
+rock.setAttribute('id', "rock");
 
+console.log(rock.getAttribute("id"));
+
+var paper = document.createElement('img');
+paper.setAttribute('src', './assets/images/paper.png');
+
+var scissors = document.createElement('img');
+scissors.setAttribute('src', './assets/images/scissors.png');
 
 var pickRock = function(){
-
+    
     playerChoiceEl.appendChild(rock);
     rockSelectEl.innerHTML = ''
     paperSelectEl.innerHTML = ''
     scissorsSelectEl.innerHTML = ''
     
     enemyChoiceEl.appendChild(enemyImgChoice);
+
+    evaluateResult(rock.getAttribute('id'),enemyChoiceEl.getAttribute('id'));
+    
+    console.log(enemyImg.getAttribute('id'));
+
+
+    // run function to evaluate and push result to array
+}
+var pickPaper = function(){
+
+    playerChoiceEl.appendChild(paper);
+    rockSelectEl.innerHTML = ''
+    paperSelectEl.innerHTML = ''
+    scissorsSelectEl.innerHTML = ''
+    
+    enemyChoiceEl.appendChild(enemyImgChoice);
+
+    // run function to evaluate and push result to array
+}
+var pickScissors = function(){
+
+    playerChoiceEl.appendChild(scissors);
+    rockSelectEl.innerHTML = ''
+    paperSelectEl.innerHTML = ''
+    scissorsSelectEl.innerHTML = ''
+    
+    enemyChoiceEl.appendChild(enemyImgChoice);
+
+    // run function to evaluate and push result to array
 }
 
 var startGame = event => {
@@ -75,18 +113,31 @@ var startGame = event => {
     rockSelectEl.appendChild(rock);
     rock.addEventListener('click',pickRock);
 
-    var paper = document.createElement('img');
-    paper.setAttribute('src', './assets/images/paper.png');
+    // var paper = document.createElement('img');
+    // paper.setAttribute('src', './assets/images/paper.png');
     paperSelectEl.appendChild(paper);
-    paper.addEventListener('click',function(){(console.log('clicked paper'))});
+    paper.addEventListener('click',pickPaper);
 
-    var scissors = document.createElement('img');
-    scissors.setAttribute('src', './assets/images/scissors.png');
+    // var scissors = document.createElement('img');
+    // scissors.setAttribute('src', './assets/images/scissors.png');
     scissorsSelectEl.appendChild(scissors);
-    scissors.addEventListener('click',function(){(console.log('clicked scissors'))});
+    scissors.addEventListener('click',pickScissors);
 }    
 
+// Evalute the round result
+
+var evaluateResult = function (playerSelection, enemySelection) {
+    if (playerSelection === enemySelection) {
+        console.log("draw")
+    };
+};
+
+
+
 bestOf3.addEventListener('click',startGame)
+
+
+
 // switch() statment 
 // Enemey
     // rock > scissors
