@@ -29,22 +29,32 @@ bestOf3.appendChild(startBtn);
 // Enemy OBJ choices
 var enemy = {
     choices: ['rock','paper','scissors'] ,
-    Bestof3Arr: []
+    Bestof3Arr: [],
+    enemyArr: [],
+   
 };
 
+var player = {
+    playerArr: [],
+}
 
-var randomChoice = enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
 
+var randomChoice = function(){
+    
+    return enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
+} 
 
+var currentEnemyChoice = 
+randomChoice();
+enemy.enemyArr.push(currentEnemyChoice);
 
-for (var i =0; i < enemy.choices.length; i++)
+console.log(enemy.enemyArr);
+
+for (var i = 0 ; i < enemy.choices.length; i++)
     enemy.Bestof3Arr.push[i]
 
-    
-console.log(enemy.Bestof3Arr)
-console.log(randomChoice);
 
-var enemyImg = "./assets/images/" + randomChoice + ".png";
+var enemyImg = "./assets/images/" + enemy.enemyArr[0] + ".png";
 enemyImgChoice.setAttribute('src', enemyImg);
 
 
@@ -52,14 +62,11 @@ var rock = document.createElement('img');
 rock.setAttribute('src', './assets/images/rock.png');
 rock.setAttribute('id', "rock");
 
-console.log(rock.getAttribute("id"));
-
 var paper = document.createElement('img');
 paper.setAttribute('src', './assets/images/paper.png');
 
 var scissors = document.createElement('img');
 scissors.setAttribute('src', './assets/images/scissors.png');
-
 
 var pickRock = function(){
     
@@ -69,7 +76,7 @@ var pickRock = function(){
     scissorsSelectEl.innerHTML = ''
     
     enemyChoiceEl.appendChild(enemyImgChoice);
-    enemyImgChoice.setAttribute('id',randomChoice);
+    enemyImgChoice.setAttribute('id',randomChoice());
     
     console.log(enemyImgChoice.getAttribute('id'));
 
@@ -78,8 +85,6 @@ var pickRock = function(){
 
     // run function to evaluate and push result to array
 }
-
-console.log(randomChoice);
 var pickPaper = function(){
 
     playerChoiceEl.appendChild(paper);
@@ -124,15 +129,9 @@ var startGame = event => {
     scissors.addEventListener('click',pickScissors);
 }    
 
-// Evalute the round result
+currentRound = 0;
 
-var evaluateResult = function (playerSelection, enemySelection) {
-    if (playerSelection === enemySelection) {
-        console.log("draw")
-    } else {
-        console.log('evaluate')
-    }
-};
+// Evalute the round result
 
 
 
