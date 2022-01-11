@@ -80,7 +80,7 @@ var pickRock = function(){
     
     console.log(enemyImgChoice.getAttribute('id'));
 
-    evaluateResult(rock.getAttribute('id'),enemyImgChoice.getAttribute('id'));
+    // evaluateResult(rock.getAttribute('id'),enemyImgChoice.getAttribute('id'));
 
 
     // run function to evaluate and push result to array
@@ -130,8 +130,22 @@ var startGame = event => {
 }    
 
 currentRound = 0;
+console.log(currentRound)
+currentRound ++
+console.log(currentRound)
 
 // Evalute the round result
+
+var evaluateResult = function (playerSelection, enemySelection) {
+    if (playerSelection === enemySelection) {
+        console.log("draw")
+    } else {
+        console.log('evaluate')
+    }
+    currentRound ++
+
+
+};
 
 
 
