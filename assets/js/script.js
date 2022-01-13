@@ -130,9 +130,6 @@ var startGame = event => {
 }    
 
 currentRound = 0;
-console.log(currentRound)
-currentRound ++
-console.log(currentRound)
 
 // Evalute the round result
 
@@ -152,6 +149,13 @@ var evaluateResult = function (playerSelection, enemySelection) {
 bestOf3.addEventListener('click',startGame)
 
 
+var evaluate = function(){
+if (playerArr[currentRound] = enemyArr[currentRound]){
+    console.log("draw")
+    currentMessage.innerHTML= messages.draw;
+    }
+    startGame();
+}
 
 // switch() statment 
 // Enemey
