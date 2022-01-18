@@ -1,173 +1,150 @@
-var messageEl = document.querySelector("#message")
-var playerChoiceEl = document.querySelector("#player-choice")
-var enemyChoiceEl = document.querySelector("#enemy-choice")
-var bestOf3 = document.querySelector("#best-of-3")
-var rockSelectEl = document.querySelector('#rock')
-var paperSelectEl = document.querySelector('#paper')
-var scissorsSelectEl = document.querySelector('#scissors')
-var enemyImgChoice = document.createElement('img');
+var messageEl = document.querySelector("#message");
+var playerChoiceEl = document.querySelector("#player-choice");
+var enemyChoiceEl = document.querySelector("#enemy-choice");
+var bestOf3 = document.querySelector("#best-of-3");
+var rockSelectEl = document.querySelector("#rock");
+var paperSelectEl = document.querySelector("#paper");
+var scissorsSelectEl = document.querySelector("#scissors");
+var enemyImgChoice = document.createElement("img");
 
 var messages = {
-    default: "Settle the score with classic roshambo",
-    choose: "Choose your weapon",
-    draw: "It's a draw. Try again",
-    rockWins: "Rock busts scissors",
-    paperWins: "Paper consumes rock",
-    scissorsWin: "Scissors cut paper",
-}
+  default: "Settle the score with classic roshambo",
+  choose: "Choose your weapon",
+  draw: "It's a draw. Try again",
+  rockWins: "Rock busts scissors",
+  paperWins: "Paper consumes rock",
+  scissorsWin: "Scissors cut paper",
+};
 
-// Opening message to init game 
+// Opening message to init game
 var currentMessage = document.createElement("span");
-currentMessage.innerHTML= messages.default;
+currentMessage.innerHTML = messages.default;
 messageEl.appendChild(currentMessage);
 
 var startBtn = document.createElement("button");
 startBtn.innerHTML = "Best 2 of 3";
-startBtn.classList.add("btn","btn-dark","btn-lg","btn-block");
+startBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
 bestOf3.appendChild(startBtn);
 
 // Enemy OBJ choices
 var enemy = {
-    choices: ['rock','paper','scissors'] ,
-    Bestof3Arr: [],
-    enemyArr: [],
-   
+  choices: ["rock", "paper", "scissors"],
+  Bestof3Arr: [],
+  enemyArr: [],
 };
 
 var player = {
-    playerArr: [],
-}
+  playerArr: [],
+};
 
+var randomChoice = function () {
+  return enemy.choices[Math.floor(Math.random() * enemy.choices.length)];
+};
 
-var randomChoice = function(){
-    
-    return enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
-} 
-
-var currentEnemyChoice = 
-randomChoice();
+var currentEnemyChoice = randomChoice();
 enemy.enemyArr.push(currentEnemyChoice);
 
 console.log(enemy.enemyArr);
+console.log(player.playerArr);
 
-for (var i = 0 ; i < enemy.choices.length; i++)
-    enemy.Bestof3Arr.push[i]
-
+for (var i = 0; i < enemy.choices.length; i++) enemy.Bestof3Arr.push[i];
 
 var enemyImg = "./assets/images/" + enemy.enemyArr[0] + ".png";
-enemyImgChoice.setAttribute('src', enemyImg);
+enemyImgChoice.setAttribute("src", enemyImg);
+
+var rock = document.createElement("img");
+rock.setAttribute("src", "./assets/images/rock.png");
+rock.setAttribute("id", "rock");
+
+var paper = document.createElement("img");
+paper.setAttribute("src", "./assets/images/paper.png");
+
+var scissors = document.createElement("img");
+scissors.setAttribute("src", "./assets/images/scissors.png");
+
+var pickRock = function () {
+  playerChoiceEl.appendChild(rock);
+  rockSelectEl.innerHTML = "";
+  paperSelectEl.innerHTML = "";
+  scissorsSelectEl.innerHTML = "";
+
+  enemyChoiceEl.appendChild(enemyImgChoice);
+  enemyImgChoice.setAttribute("id", randomChoice());
+  player.playerArr.push('rock')
+  evaluate();
+
+};
+var pickPaper = function () {
+  playerChoiceEl.appendChild(paper);
+  rockSelectEl.innerHTML = "";
+  paperSelectEl.innerHTML = "";
+  scissorsSelectEl.innerHTML = "";
+
+  enemyChoiceEl.appendChild(enemyImgChoice);
+  player.playerArr.push('paper')
+  evaluate();
 
 
-var rock = document.createElement('img');
-rock.setAttribute('src', './assets/images/rock.png');
-rock.setAttribute('id', "rock");
+};
+var pickScissors = function () {
+  playerChoiceEl.appendChild(scissors);
+  rockSelectEl.innerHTML = "";
+  paperSelectEl.innerHTML = "";
+  scissorsSelectEl.innerHTML = "";
 
-var paper = document.createElement('img');
-paper.setAttribute('src', './assets/images/paper.png');
-
-var scissors = document.createElement('img');
-scissors.setAttribute('src', './assets/images/scissors.png');
-
-var pickRock = function(){
-    
-    playerChoiceEl.appendChild(rock);
-    rockSelectEl.innerHTML = ''
-    paperSelectEl.innerHTML = ''
-    scissorsSelectEl.innerHTML = ''
-    
-    enemyChoiceEl.appendChild(enemyImgChoice);
-    enemyImgChoice.setAttribute('id',randomChoice());
-    
-    console.log(enemyImgChoice.getAttribute('id'));
-
-    // evaluateResult(rock.getAttribute('id'),enemyImgChoice.getAttribute('id'));
+  enemyChoiceEl.appendChild(enemyImgChoice);
+  player.playerArr.push('scissors')
+  evaluate();
 
 
-    // run function to evaluate and push result to array
-}
-var pickPaper = function(){
 
-    playerChoiceEl.appendChild(paper);
-    rockSelectEl.innerHTML = ''
-    paperSelectEl.innerHTML = ''
-    scissorsSelectEl.innerHTML = ''
-    
-    enemyChoiceEl.appendChild(enemyImgChoice);
+  // run function to evaluate and push result to array
+};
 
-    // run function to evaluate and push result to array
-}
-var pickScissors = function(){
+var startGame = (event) => {
+  bestOf3.innerHTML = "";
 
-    playerChoiceEl.appendChild(scissors);
-    rockSelectEl.innerHTML = ''
-    paperSelectEl.innerHTML = ''
-    scissorsSelectEl.innerHTML = ''
-    
-    enemyChoiceEl.appendChild(enemyImgChoice);
+  currentMessage.innerHTML = messages.choose;
 
-    // run function to evaluate and push result to array
-}
+  // var rock = document.createElement('img');
+  // rock.setAttribute('src', './assets/images/rock.png');
+  rockSelectEl.appendChild(rock);
+  rock.addEventListener("click", pickRock);
 
-var startGame = event => {
-    bestOf3.innerHTML = ""
+  // var paper = document.createElement('img');
+  // paper.setAttribute('src', './assets/images/paper.png');
+  paperSelectEl.appendChild(paper);
+  paper.addEventListener("click", pickPaper);
 
-    currentMessage.innerHTML= messages.choose;
+  // var scissors = document.createElement('img');
+  // scissors.setAttribute('src', './assets/images/scissors.png');
+  scissorsSelectEl.appendChild(scissors);
+  scissors.addEventListener("click", pickScissors);
 
-    // var rock = document.createElement('img');
-    // rock.setAttribute('src', './assets/images/rock.png');
-    rockSelectEl.appendChild(rock);
-    rock.addEventListener('click',pickRock);
-
-    // var paper = document.createElement('img');
-    // paper.setAttribute('src', './assets/images/paper.png');
-    paperSelectEl.appendChild(paper);
-    paper.addEventListener('click',pickPaper);
-
-    // var scissors = document.createElement('img');
-    // scissors.setAttribute('src', './assets/images/scissors.png');
-    scissorsSelectEl.appendChild(scissors);
-    scissors.addEventListener('click',pickScissors);
-}    
+};
 
 currentRound = 0;
 
 // Evalute the round result
 
-var evaluateResult = function (playerSelection, enemySelection) {
-    if (playerSelection === enemySelection) {
-        console.log("draw")
-    } else {
-        console.log('evaluate')
-    }
-    currentRound ++
+bestOf3.addEventListener("click", startGame);
 
-
+var evaluate = function () {
+  if ((player.playerArr[currentRound] = enemy.enemyArr[currentRound])) {
+    console.log("draw");
+    currentMessage.innerHTML = messages.draw;
+  }
+  startGame();
 };
 
-
-
-bestOf3.addEventListener('click',startGame)
-
-
-var evaluate = function(){
-if (playerArr[currentRound] = enemyArr[currentRound]){
-    console.log("draw")
-    currentMessage.innerHTML= messages.draw;
-    }
-    startGame();
-}
-
-// switch() statment 
+// switch() statment
 // Enemey
-    // rock > scissors
-    // paper > rock
-    // scissors > paper
+// rock > scissors
+// paper > rock
+// scissors > paper
 // Player
-    // rock > scissors
-    // paper > rock
-    // scissors > paper
-// Player gets three options to choose from 
+// rock > scissors
+// paper > rock
+// scissors > paper
+// Player gets three options to choose from
 // function to append player choice and use math random to choose enemy choice
-
-
-
