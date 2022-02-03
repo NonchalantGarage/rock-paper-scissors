@@ -16,6 +16,33 @@ var messages = {
   scissorsWin: "Scissors cut paper",
 };
 
+// User clicks start game 
+// Three options 
+  // message: pick your weapon 
+// Your choice vs enemy choice 
+  // message: you won or lost this round
+  // display current score at the bottom
+// Your choice vs enemy choice 
+  // message: you won or lost this round
+  // display current score at the bottom
+// Game Over enter your initials for winner 
+  // display button to play again
+
+
+
+  // Start game
+    // every enemy Arr is populated 
+  // Each player selection push string selection to player ARR
+  // currentRound = 0
+  // IF playerSelection[currentRound] = enemySelection[currentRound], then draw
+    // ELSE switch if playerSelection[currentRound] = rock && enemySelection[currentRound] = scissors
+    
+
+  
+
+
+// DOM ELEMENTS 
+
 // Opening message to init game
 var currentMessage = document.createElement("span");
 currentMessage.innerHTML = messages.default;
@@ -41,8 +68,10 @@ var randomChoice = function () {
   return enemy.choices[Math.floor(Math.random() * enemy.choices.length)];
 };
 
+for (let i=0; i < 3; i++){
 var currentEnemyChoice = randomChoice();
 enemy.enemyArr.push(currentEnemyChoice);
+}
 
 console.log(enemy.enemyArr);
 console.log(player.playerArr);
@@ -71,7 +100,6 @@ var pickRock = function () {
   enemyChoiceEl.appendChild(enemyImgChoice);
   enemyImgChoice.setAttribute("id", randomChoice());
   player.playerArr.push('rock')
-  evaluate();
 
 };
 var pickPaper = function () {
@@ -82,7 +110,6 @@ var pickPaper = function () {
 
   enemyChoiceEl.appendChild(enemyImgChoice);
   player.playerArr.push('paper')
-  evaluate();
 
 
 };
@@ -94,13 +121,10 @@ var pickScissors = function () {
 
   enemyChoiceEl.appendChild(enemyImgChoice);
   player.playerArr.push('scissors')
-  evaluate();
-
-
-
-  // run function to evaluate and push result to array
 };
 
+
+// GAME LOGIC
 var startGame = (event) => {
   bestOf3.innerHTML = "";
 
@@ -136,6 +160,7 @@ var evaluate = function () {
   }
   startGame();
 };
+
 
 // switch() statment
 // Enemey
