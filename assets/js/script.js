@@ -17,8 +17,7 @@ var messages = {
 };
 
 // User clicks start game 
-// Three options 
-  // message: pick your weapon 
+
 // Your choice vs enemy choice 
   // message: you won or lost this round
   // display current score at the bottom
@@ -64,21 +63,23 @@ var player = {
   playerArr: [],
 };
 
+// Get random input from enemy
 var randomChoice = function () {
   return enemy.choices[Math.floor(Math.random() * enemy.choices.length)];
 };
 
-for (let i=0; i < 3; i++){
-var currentEnemyChoice = randomChoice();
+// Push random input from enemy 
+const currentEnemyChoice = randomChoice();
 enemy.enemyArr.push(currentEnemyChoice);
-}
 
-console.log(enemy.enemyArr);
+
 console.log(player.playerArr);
+console.log(enemy.enemyArr);
 
-for (var i = 0; i < enemy.choices.length; i++) enemy.Bestof3Arr.push[i];
+currentRound = 0;
 
-var enemyImg = "./assets/images/" + enemy.enemyArr[0] + ".png";
+// Display enemy choice
+var enemyImg = "./assets/images/" + enemy.enemyArr[currentRound] + ".png";
 enemyImgChoice.setAttribute("src", enemyImg);
 
 var rock = document.createElement("img");
@@ -91,6 +92,8 @@ paper.setAttribute("src", "./assets/images/paper.png");
 var scissors = document.createElement("img");
 scissors.setAttribute("src", "./assets/images/scissors.png");
 
+// Click choices hanlders
+
 var pickRock = function () {
   playerChoiceEl.appendChild(rock);
   rockSelectEl.innerHTML = "";
@@ -100,6 +103,7 @@ var pickRock = function () {
   enemyChoiceEl.appendChild(enemyImgChoice);
   enemyImgChoice.setAttribute("id", randomChoice());
   player.playerArr.push('rock')
+  evaluate();
 
 };
 var pickPaper = function () {
@@ -110,6 +114,9 @@ var pickPaper = function () {
 
   enemyChoiceEl.appendChild(enemyImgChoice);
   player.playerArr.push('paper')
+  evaluate();
+
+
 
 
 };
@@ -121,7 +128,12 @@ var pickScissors = function () {
 
   enemyChoiceEl.appendChild(enemyImgChoice);
   player.playerArr.push('scissors')
+  evaluate();
+
+
 };
+
+
 
 
 // GAME LOGIC
@@ -151,15 +163,21 @@ currentRound = 0;
 
 // Evalute the round result
 
-bestOf3.addEventListener("click", startGame);
+const evaluate = function () {
+  console.log(player.playerArr[currentRound])
+  console.log(enemy.enemyArr[currentRound])
 
-var evaluate = function () {
-  if ((player.playerArr[currentRound] = enemy.enemyArr[currentRound])) {
+  if (player.playerArr[currentRound] === enemy.enemyArr[currentRound]) {
     console.log("draw");
     currentMessage.innerHTML = messages.draw;
+  } else {
+    console.log('determine winner')
   }
-  startGame();
+  // startGame();
 };
+
+bestOf3.addEventListener("click", startGame);
+
 
 
 // switch() statment
