@@ -169,9 +169,17 @@ const evaluate = function () {
 
   if (player.playerArr[currentRound] === enemy.enemyArr[currentRound]) {
     console.log("draw");
-    currentMessage.innerHTML = messages.draw;
-  } else {
-    console.log('determine winner')
+    currentMessage.innerHTML = messages.draw
+    // Player win options
+  } else if (player.playerArr[currentRound] === "rock" && enemy.enemyArr[currentRound] === "scissors"){
+    currentMessage.innerHTML = messages.rockWins
+  } else if (player.playerArr[currentRound] === "paper" && enemy.enemyArr[currentRound] === "rock"){
+    currentMessage.innerHTML = messages.paperWins
+  } else if (player.playerArr[currentRound] === "scissors" && enemy.enemyArr[currentRound] === "paper"){
+    currentMessage.innerHTML = messages.scissorsWin
+  } else if (player.playerArr[currentRound] === "scissors" && enemy.enemyArr[currentRound] === "paper"){
+    currentMessage.innerHTML = messages.scissorsWin
+    // Enemy win options
   }
   // startGame();
 };
