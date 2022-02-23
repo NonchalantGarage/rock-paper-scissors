@@ -6,41 +6,42 @@ var rockSelectEl = document.querySelector("#rock");
 var paperSelectEl = document.querySelector("#paper");
 var scissorsSelectEl = document.querySelector("#scissors");
 var enemyImgChoice = document.createElement("img");
+var nextRound = document.querySelector("#next-round");
 
 var messages = {
   default: "Settle the score with classic roshambo",
   choose: "Choose your weapon",
   draw: "It's a draw. Try again",
-  rockWins: "Rock busts scissors",
-  paperWins: "Paper consumes rock",
-  scissorsWin: "Scissors cut paper",
+  rockWins: "Rock busts scissors, you won this round!",
+  paperWins: "Paper consumes rock, you won this round!",
+  scissorsWin: "Scissors cut paper, you won this round!",
+  enemyRockWins: "Rock busts scissors, you lost this round!",
+  enemyPaperWins: "Paper consumes rock, you lost this round!",
+  enemyScissorsWin: "Scissors cut paper, you lost this round!",
 };
 
-// User clicks start game 
+// User clicks start game
 
-// Your choice vs enemy choice 
-  // message: you won or lost this round
-  // display current score at the bottom
-// Your choice vs enemy choice 
-  // message: you won or lost this round
-  // display current score at the bottom
-// Game Over enter your initials for winner 
-  // display button to play again
+// Your choice vs enemy choice
+// message: you won or lost this round
+// display current score at the bottom
+// Your choice vs enemy choice
+// message: you won or lost this round
+// display current score at the bottom
+// Game Over enter your initials for winner
+// display button to play again
 
+// Start game
+// every enemy Arr is populated
+// Each player selection push string selection to player ARR
+// currentRound = 0
+// IF playerSelection[currentRound] = enemySelection[currentRound], then draw
+// ELSE switch if playerSelection[currentRound] = rock && enemySelection[currentRound] = scissors
 
-
-  // Start game
-    // every enemy Arr is populated 
-  // Each player selection push string selection to player ARR
-  // currentRound = 0
-  // IF playerSelection[currentRound] = enemySelection[currentRound], then draw
-    // ELSE switch if playerSelection[currentRound] = rock && enemySelection[currentRound] = scissors
-    
-
-  
+// Define states
 
 
-// DOM ELEMENTS 
+// DOM ELEMENTS
 
 // Opening message to init game
 var currentMessage = document.createElement("span");
@@ -68,15 +69,14 @@ var randomChoice = function () {
   return enemy.choices[Math.floor(Math.random() * enemy.choices.length)];
 };
 
-// Push random input from enemy 
+// Push random input from enemy
 const currentEnemyChoice = randomChoice();
 enemy.enemyArr.push(currentEnemyChoice);
-
 
 console.log(player.playerArr);
 console.log(enemy.enemyArr);
 
-currentRound = 0;
+let currentRound = 0;
 
 // Display enemy choice
 var enemyImg = "./assets/images/" + enemy.enemyArr[currentRound] + ".png";
@@ -102,9 +102,8 @@ var pickRock = function () {
 
   enemyChoiceEl.appendChild(enemyImgChoice);
   enemyImgChoice.setAttribute("id", randomChoice());
-  player.playerArr.push('rock')
+  player.playerArr.push("rock");
   evaluate();
-
 };
 var pickPaper = function () {
   playerChoiceEl.appendChild(paper);
@@ -113,12 +112,8 @@ var pickPaper = function () {
   scissorsSelectEl.innerHTML = "";
 
   enemyChoiceEl.appendChild(enemyImgChoice);
-  player.playerArr.push('paper')
+  player.playerArr.push("paper");
   evaluate();
-
-
-
-
 };
 var pickScissors = function () {
   playerChoiceEl.appendChild(scissors);
@@ -127,14 +122,9 @@ var pickScissors = function () {
   scissorsSelectEl.innerHTML = "";
 
   enemyChoiceEl.appendChild(enemyImgChoice);
-  player.playerArr.push('scissors')
+  player.playerArr.push("scissors");
   evaluate();
-
-
 };
-
-
-
 
 // GAME LOGIC
 var startGame = (event) => {
@@ -156,7 +146,6 @@ var startGame = (event) => {
   // scissors.setAttribute('src', './assets/images/scissors.png');
   scissorsSelectEl.appendChild(scissors);
   scissors.addEventListener("click", pickScissors);
-
 };
 
 currentRound = 0;
@@ -164,29 +153,47 @@ currentRound = 0;
 // Evalute the round result
 
 const evaluate = function () {
-  console.log(player.playerArr[currentRound])
-  console.log(enemy.enemyArr[currentRound])
+  const playerVs = player.playerArr[currentRound];
+  const enemyVs = enemy.enemyArr[currentRound];
 
-  if (player.playerArr[currentRound] === enemy.enemyArr[currentRound]) {
-    console.log("draw");
-    currentMessage.innerHTML = messages.draw
-    // Player win options
-  } else if (player.playerArr[currentRound] === "rock" && enemy.enemyArr[currentRound] === "scissors"){
-    currentMessage.innerHTML = messages.rockWins
-  } else if (player.playerArr[currentRound] === "paper" && enemy.enemyArr[currentRound] === "rock"){
-    currentMessage.innerHTML = messages.paperWins
-  } else if (player.playerArr[currentRound] === "scissors" && enemy.enemyArr[currentRound] === "paper"){
-    currentMessage.innerHTML = messages.scissorsWin
-  } else if (player.playerArr[currentRound] === "scissors" && enemy.enemyArr[currentRound] === "paper"){
-    currentMessage.innerHTML = messages.scissorsWin
-    // Enemy win options
+  if (playerVs === enemyVs) {
+    currentMessage.innerHTML = messages.draw;
+    var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+    nextBtn.addEventListener("click", startGame);
+
+    // Player win options 
+  } else if (playerVs === "rock" && enemyVs === "scissors") {
+    currentMessage.innerHTML = messages.rockWins;
+    var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+  } else if (playerVs === "paper" && enemyVs === "rock") {
+    currentMessage.innerHTML = messages.paperWins;
+  } else if (playerVs === "scissors" && enemyVs === "paper") {
+    currentMessage.innerHTML = messages.scissorsWin;
+
+    // enemey win options
+  } else if (enemyVs === "scissors" && playerVs === "paper") {
+    currentMessage.innerHTML = messages.enemyScissorsWin;
+  } else if (enemyVs === "paper" && playerVs === "rock") {
+    currentMessage.innerHTML = messages.enemyPaperWins;
+  } else if (enemyVs === "rock" && playerVs === "scissors") {
+    currentMessage.innerHTML = messages.enemyRockWins;
   }
-  // startGame();
 };
 
+// var nextBtn = document.createElement("button");
+// nextBtn.innerHTML = "Next Round";
+// nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+// nextRound.appendChild(nextBtn);
+
+// startGame();
+
 bestOf3.addEventListener("click", startGame);
-
-
 
 // switch() statment
 // Enemey
