@@ -40,7 +40,6 @@ var messages = {
 
 // Define states
 
-
 // DOM ELEMENTS
 
 // Opening message to init game
@@ -64,15 +63,13 @@ var player = {
   playerArr: [],
 };
 
-// Get random input from enemy
-var randomChoice = function () {
-  return enemy.choices[Math.floor(Math.random() * enemy.choices.length)];
-};
+// Get random input from enemy & Push random input from enemy
 
-// Push random input from enemy
-const currentEnemyChoice = randomChoice();
-enemy.enemyArr.push(currentEnemyChoice);
-
+for (i = 0; i < 3; i++) {
+  enemy.enemyArr.push(
+    enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
+  );
+}
 console.log(player.playerArr);
 console.log(enemy.enemyArr);
 
@@ -101,7 +98,7 @@ var pickRock = function () {
   scissorsSelectEl.innerHTML = "";
 
   enemyChoiceEl.appendChild(enemyImgChoice);
-  enemyImgChoice.setAttribute("id", randomChoice());
+  // enemyImgChoice.setAttribute("id", randomChoice());
   player.playerArr.push("rock");
   evaluate();
 };
@@ -148,8 +145,6 @@ var startGame = (event) => {
   scissors.addEventListener("click", pickScissors);
 };
 
-currentRound = 0;
-
 // Evalute the round result
 
 const evaluate = function () {
@@ -164,7 +159,7 @@ const evaluate = function () {
     nextRound.appendChild(nextBtn);
     nextBtn.addEventListener("click", startGame);
 
-    // Player win options 
+    // Player win options
   } else if (playerVs === "rock" && enemyVs === "scissors") {
     currentMessage.innerHTML = messages.rockWins;
     var nextBtn = document.createElement("button");
@@ -173,16 +168,41 @@ const evaluate = function () {
     nextRound.appendChild(nextBtn);
   } else if (playerVs === "paper" && enemyVs === "rock") {
     currentMessage.innerHTML = messages.paperWins;
+    var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+    nextBtn.addEventListener("click", startGame);
   } else if (playerVs === "scissors" && enemyVs === "paper") {
     currentMessage.innerHTML = messages.scissorsWin;
+    var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+    nextBtn.addEventListener("click", startGame);
 
     // enemey win options
   } else if (enemyVs === "scissors" && playerVs === "paper") {
     currentMessage.innerHTML = messages.enemyScissorsWin;
+    var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+    nextBtn.addEventListener("click", startGame);
   } else if (enemyVs === "paper" && playerVs === "rock") {
     currentMessage.innerHTML = messages.enemyPaperWins;
+    var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+    nextBtn.addEventListener("click", startGame);
   } else if (enemyVs === "rock" && playerVs === "scissors") {
     currentMessage.innerHTML = messages.enemyRockWins;
+    var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+    nextBtn.addEventListener("click", startGame);
   }
 };
 
@@ -195,14 +215,5 @@ const evaluate = function () {
 
 bestOf3.addEventListener("click", startGame);
 
-// switch() statment
-// Enemey
-// rock > scissors
-// paper > rock
-// scissors > paper
-// Player
-// rock > scissors
-// paper > rock
-// scissors > paper
 // Player gets three options to choose from
 // function to append player choice and use math random to choose enemy choice
