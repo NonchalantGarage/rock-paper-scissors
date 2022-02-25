@@ -20,6 +20,18 @@ var messages = {
   enemyScissorsWin: "Scissors cut paper, you lost this round!",
 };
 
+function winRound (){
+  let win = 0
+
+  return function (){
+    win++
+  }
+}
+
+const winning = winRound();
+winning();
+
+
 // User clicks start game
 
 // Your choice vs enemy choice
@@ -91,6 +103,7 @@ scissors.setAttribute("src", "./assets/images/scissors.png");
 
 // Click choices hanlders
 
+
 var pickRock = function () {
   playerChoiceEl.appendChild(rock);
   rockSelectEl.innerHTML = "";
@@ -125,6 +138,7 @@ var pickScissors = function () {
 
 // GAME LOGIC
 var startGame = (event) => {
+
   bestOf3.innerHTML = "";
 
   currentMessage.innerHTML = messages.choose;
