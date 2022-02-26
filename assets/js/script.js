@@ -28,6 +28,8 @@ function winRound (){
   }
 }
 
+  
+
 const winning = winRound();
 winning();
 
@@ -76,6 +78,32 @@ var player = {
 };
 
 // Get random input from enemy & Push random input from enemy
+
+function counter() {
+  let count = 0;
+  return function() {
+    return count++;
+  }
+}
+
+const increment = counter();
+console.log(increment()); //=> 0
+
+
+function bike (components) {
+  return function (bike){
+    return "My " + bike + " uses " + components
+  }
+}
+
+const cannondale = bike("shimano");
+cannondale("synapse");
+
+var di2 = function (bike){
+  return bike + " and it's electronic"
+}
+
+console.log(di2(cannondale("synapse")))
 
 for (i = 0; i < 3; i++) {
   enemy.enemyArr.push(
