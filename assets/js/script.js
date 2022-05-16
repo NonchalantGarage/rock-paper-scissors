@@ -30,8 +30,6 @@ function winRound (){
 
   
 
-const winning = winRound();
-winning();
 
 
 // User clicks start game
@@ -90,21 +88,6 @@ const increment = counter();
 console.log(increment()); //=> 0
 
 
-function bike (components) {
-  return function (bike){
-    return "My " + bike + " uses " + components
-  }
-}
-
-const cannondale = bike("shimano");
-cannondale("synapse");
-
-var di2 = function (bike){
-  return bike + " and it's electronic"
-}
-
-console.log(di2(cannondale("synapse")))
-
 for (i = 0; i < 3; i++) {
   enemy.enemyArr.push(
     enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
@@ -139,7 +122,6 @@ var pickRock = function () {
   scissorsSelectEl.innerHTML = "";
 
   enemyChoiceEl.appendChild(enemyImgChoice);
-  // enemyImgChoice.setAttribute("id", randomChoice());
   player.playerArr.push("rock");
   evaluate();
 };
@@ -169,6 +151,9 @@ var startGame = (event) => {
 
   bestOf3.innerHTML = "";
 
+  enemyChoiceEl.innerHTML = "";
+
+  nextRound.innerHTML = "";
   currentMessage.innerHTML = messages.choose;
 
   // var rock = document.createElement('img');
