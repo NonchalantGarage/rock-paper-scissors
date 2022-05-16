@@ -20,16 +20,28 @@ var messages = {
   enemyScissorsWin: "Scissors cut paper, you lost this round!",
 };
 
-function winRound (){
-  let win = 0
+function continueGame(){
+  let round = 1;
 
-  return function (){
-    win++
+
+  return function(){
+    return round++
   }
+
 }
 
-  
+const followRound = continueGame()
 
+
+let currentRoundData = 0
+
+function theRound() {
+  return currentRoundData
+}
+
+function roundUp() {
+  currentRoundData++
+}
 
 
 // User clicks start game
@@ -77,16 +89,6 @@ var player = {
 
 // Get random input from enemy & Push random input from enemy
 
-function counter() {
-  let count = 0;
-  return function() {
-    return count++;
-  }
-}
-
-const increment = counter();
-console.log(increment()); //=> 0
-
 
 for (i = 0; i < 3; i++) {
   enemy.enemyArr.push(
@@ -96,11 +98,7 @@ for (i = 0; i < 3; i++) {
 console.log(player.playerArr);
 console.log(enemy.enemyArr);
 
-let currentRound = 0;
 
-// Display enemy choice
-var enemyImg = "./assets/images/" + enemy.enemyArr[currentRound] + ".png";
-enemyImgChoice.setAttribute("src", enemyImg);
 
 var rock = document.createElement("img");
 rock.setAttribute("src", "./assets/images/rock.png");
@@ -175,8 +173,12 @@ var startGame = (event) => {
 // Evalute the round result
 
 const evaluate = function () {
-  const playerVs = player.playerArr[currentRound];
-  const enemyVs = enemy.enemyArr[currentRound];
+  const playerVs = player.playerArr[currentRoundData];
+  const enemyVs = enemy.enemyArr[currentRoundData];
+  console.log(currentRoundData)
+  // Display enemy choice
+var enemyImg = "./assets/images/" + enemy.enemyArr[currentRoundData] + ".png";
+enemyImgChoice.setAttribute("src", enemyImg);
 
   if (playerVs === enemyVs) {
     currentMessage.innerHTML = messages.draw;
@@ -231,6 +233,8 @@ const evaluate = function () {
     nextRound.appendChild(nextBtn);
     nextBtn.addEventListener("click", startGame);
   }
+  roundUp();
+
 };
 
 // var nextBtn = document.createElement("button");
