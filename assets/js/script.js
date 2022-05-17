@@ -20,29 +20,15 @@ var messages = {
   enemyScissorsWin: "Scissors cut paper, you lost this round!",
 };
 
-function continueGame(){
-  let round = 1;
-
-
-  return function(){
-    return round++
-  }
-
-}
-
-const followRound = continueGame()
-
-
-let currentRoundData = 0
+let currentRoundData = 0;
 
 function theRound() {
-  return currentRoundData
+  return currentRoundData;
 }
 
 function roundUp() {
-  currentRoundData++
+  currentRoundData++;
 }
-
 
 // User clicks start game
 
@@ -89,16 +75,20 @@ var player = {
 
 // Get random input from enemy & Push random input from enemy
 
+const enemyShuffle = () => {
+  let index =  Math.floor(Math.random() * enemy.choices.length);
+  return enemy.choices[index]
+};
 
-for (i = 0; i < 3; i++) {
-  enemy.enemyArr.push(
-    enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
-  );
-}
+console.log(enemyShuffle());
+
+// for (i = 0; i < 3; i++) {
+//   enemy.enemyArr.push(
+//     enemy.choices[Math.floor(Math.random() * enemy.choices.length)]
+//   );
+// }
 console.log(player.playerArr);
 console.log(enemy.enemyArr);
-
-
 
 var rock = document.createElement("img");
 rock.setAttribute("src", "./assets/images/rock.png");
@@ -111,7 +101,6 @@ var scissors = document.createElement("img");
 scissors.setAttribute("src", "./assets/images/scissors.png");
 
 // Click choices hanlders
-
 
 var pickRock = function () {
   playerChoiceEl.appendChild(rock);
@@ -146,7 +135,6 @@ var pickScissors = function () {
 
 // GAME LOGIC
 var startGame = (event) => {
-
   bestOf3.innerHTML = "";
 
   enemyChoiceEl.innerHTML = "";
@@ -174,11 +162,11 @@ var startGame = (event) => {
 
 const evaluate = function () {
   const playerVs = player.playerArr[currentRoundData];
-  const enemyVs = enemy.enemyArr[currentRoundData];
-  console.log(currentRoundData)
+  const enemyVs = enemyShuffle();
+  console.log(currentRoundData);
   // Display enemy choice
-var enemyImg = "./assets/images/" + enemy.enemyArr[currentRoundData] + ".png";
-enemyImgChoice.setAttribute("src", enemyImg);
+  var enemyImg = "./assets/images/" + enemyVs + ".png";
+  enemyImgChoice.setAttribute("src", enemyImg);
 
   if (playerVs === enemyVs) {
     currentMessage.innerHTML = messages.draw;
@@ -234,7 +222,7 @@ enemyImgChoice.setAttribute("src", enemyImg);
     nextBtn.addEventListener("click", startGame);
   }
   roundUp();
-
+  console.log(player.playerArr);
 };
 
 // var nextBtn = document.createElement("button");
