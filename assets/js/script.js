@@ -7,6 +7,9 @@ var paperSelectEl = document.querySelector("#paper");
 var scissorsSelectEl = document.querySelector("#scissors");
 var enemyImgChoice = document.createElement("img");
 var nextRound = document.querySelector("#next-round");
+var playerScoreEl = document.querySelector("#player-scoreboard");
+var enemyScoreEl = document.querySelector("#enemy-scoreboard");
+
 
 var messages = {
   default: "Settle the score with classic roshambo",
@@ -29,6 +32,7 @@ function theRound() {
 function roundUp() {
   currentRoundData++;
 }
+
 
 // User clicks start game
 
@@ -67,13 +71,16 @@ var enemy = {
   choices: ["rock", "paper", "scissors"],
   Bestof3Arr: [],
   enemyArr: [],
+  scoreboard: 0
 };
 
 var player = {
   playerArr: [],
+  scoreboard: 0
 };
 
 // Get random input from enemy & Push random input from enemy
+
 
 const enemyShuffle = () => {
   let index =  Math.floor(Math.random() * enemy.choices.length);
@@ -166,6 +173,9 @@ function nextRoundUI (){
     nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
     nextRound.appendChild(nextBtn);
     nextBtn.addEventListener("click", startGame);
+    rock.removeEventListener("click", pickRock);
+    paper.removeEventListener("click", pickPaper);
+    scissors.removeEventListener("click", pickScissors);
 }
 
 
