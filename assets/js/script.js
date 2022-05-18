@@ -176,6 +176,8 @@ function nextRoundUI (){
     rock.removeEventListener("click", pickRock);
     paper.removeEventListener("click", pickPaper);
     scissors.removeEventListener("click", pickScissors);
+    playerScoreEl.innerHTML = player.scoreboard
+    enemyScoreEl.innerHTML = enemy.scoreboard
 }
 
 
@@ -194,29 +196,43 @@ const evaluate = function () {
     // Player win options
   } else if (playerVs === "rock" && enemyVs === "scissors") {
     currentMessage.innerHTML = messages.rockWins;
+    player.scoreboard++
+
     nextRoundUI()
 
 
   } else if (playerVs === "paper" && enemyVs === "rock") {
     currentMessage.innerHTML = messages.paperWins;
+    player.scoreboard++
+
     nextRoundUI()
+
 
   } else if (playerVs === "scissors" && enemyVs === "paper") {
     currentMessage.innerHTML = messages.scissorsWin;
+    player.scoreboard++
+
     nextRoundUI()
+
 
 
     // enemey win options
   } else if (enemyVs === "scissors" && playerVs === "paper") {
     currentMessage.innerHTML = messages.enemyScissorsWin;
+    enemy.scoreboard++
+
     nextRoundUI()
+
 
   } else if (enemyVs === "paper" && playerVs === "rock") {
     currentMessage.innerHTML = messages.enemyPaperWins;
+    enemy.scoreboard++
     nextRoundUI()
 
   } else if (enemyVs === "rock" && playerVs === "scissors") {
     currentMessage.innerHTML = messages.enemyRockWins;
+    enemy.scoreboard++
+
     nextRoundUI()
 
   }
