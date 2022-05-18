@@ -92,7 +92,7 @@ console.log(enemy.enemyArr);
 
 var rock = document.createElement("img");
 rock.setAttribute("src", "./assets/images/rock.png");
-rock.setAttribute("id", "rock");
+// rock.setAttribute("id", "rock");
 
 var paper = document.createElement("img");
 paper.setAttribute("src", "./assets/images/paper.png");
@@ -160,6 +160,15 @@ var startGame = (event) => {
 
 // Evalute the round result
 
+function nextRoundUI (){
+  var nextBtn = document.createElement("button");
+    nextBtn.innerHTML = "Next Round";
+    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+    nextRound.appendChild(nextBtn);
+    nextBtn.addEventListener("click", startGame);
+}
+
+
 const evaluate = function () {
   const playerVs = player.playerArr[currentRoundData];
   const enemyVs = enemyShuffle();
@@ -170,56 +179,36 @@ const evaluate = function () {
 
   if (playerVs === enemyVs) {
     currentMessage.innerHTML = messages.draw;
-    var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
-    nextBtn.addEventListener("click", startGame);
+    nextRoundUI()
 
     // Player win options
   } else if (playerVs === "rock" && enemyVs === "scissors") {
     currentMessage.innerHTML = messages.rockWins;
-    var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
+    nextRoundUI()
+
+
   } else if (playerVs === "paper" && enemyVs === "rock") {
     currentMessage.innerHTML = messages.paperWins;
-    var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
-    nextBtn.addEventListener("click", startGame);
+    nextRoundUI()
+
   } else if (playerVs === "scissors" && enemyVs === "paper") {
     currentMessage.innerHTML = messages.scissorsWin;
-    var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
-    nextBtn.addEventListener("click", startGame);
+    nextRoundUI()
+
 
     // enemey win options
   } else if (enemyVs === "scissors" && playerVs === "paper") {
     currentMessage.innerHTML = messages.enemyScissorsWin;
-    var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
-    nextBtn.addEventListener("click", startGame);
+    nextRoundUI()
+
   } else if (enemyVs === "paper" && playerVs === "rock") {
     currentMessage.innerHTML = messages.enemyPaperWins;
-    var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
-    nextBtn.addEventListener("click", startGame);
+    nextRoundUI()
+
   } else if (enemyVs === "rock" && playerVs === "scissors") {
     currentMessage.innerHTML = messages.enemyRockWins;
-    var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
-    nextBtn.addEventListener("click", startGame);
+    nextRoundUI()
+
   }
   roundUp();
   console.log(player.playerArr);
