@@ -62,7 +62,7 @@ currentMessage.innerHTML = messages.default;
 messageEl.appendChild(currentMessage);
 
 var startBtn = document.createElement("button");
-startBtn.innerHTML = "Best 2 of 3";
+startBtn.innerHTML = "Start Game";
 startBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
 bestOf3.appendChild(startBtn);
 
