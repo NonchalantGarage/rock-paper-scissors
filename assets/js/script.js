@@ -10,7 +10,6 @@ var nextRound = document.querySelector("#next-round");
 var playerScoreEl = document.querySelector("#player-scoreboard");
 var enemyScoreEl = document.querySelector("#enemy-scoreboard");
 
-
 var messages = {
   default: "Settle the score with classic roshambo",
   choose: "Choose your weapon",
@@ -21,6 +20,8 @@ var messages = {
   enemyRockWins: "Rock busts scissors, you lost this round!",
   enemyPaperWins: "Paper consumes rock, you lost this round!",
   enemyScissorsWin: "Scissors cut paper, you lost this round!",
+  playerWins: "Congrats! You Won",
+  enemyWins: "Bummer...You Lost",
 };
 
 let currentRoundData = 0;
@@ -32,7 +33,6 @@ function theRound() {
 function roundUp() {
   currentRoundData++;
 }
-
 
 // User clicks start game
 
@@ -71,20 +71,19 @@ var enemy = {
   choices: ["rock", "paper", "scissors"],
   Bestof3Arr: [],
   enemyArr: [],
-  scoreboard: 0
+  scoreboard: 0,
 };
 
 var player = {
   playerArr: [],
-  scoreboard: 0
+  scoreboard: 0,
 };
 
 // Get random input from enemy & Push random input from enemy
 
-
 const enemyShuffle = () => {
-  let index =  Math.floor(Math.random() * enemy.choices.length);
-  return enemy.choices[index]
+  let index = Math.floor(Math.random() * enemy.choices.length);
+  return enemy.choices[index];
 };
 
 console.log(enemyShuffle());
@@ -167,19 +166,39 @@ var startGame = (event) => {
 
 // Evalute the round result
 
-function nextRoundUI (){
-  var nextBtn = document.createElement("button");
-    nextBtn.innerHTML = "Next Round";
-    nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
-    nextRound.appendChild(nextBtn);
-    nextBtn.addEventListener("click", startGame);
-    rock.removeEventListener("click", pickRock);
-    paper.removeEventListener("click", pickPaper);
-    scissors.removeEventListener("click", pickScissors);
-    playerScoreEl.innerHTML = player.scoreboard
-    enemyScoreEl.innerHTML = enemy.scoreboard
+function resetScore() {
+  enemy.scoreboard = 0;
+  player.scoreboard = 0;
+
 }
 
+function checkContinue() {
+  if (player.scoreboard == 2 && enemy.scoreboard <= 1) {
+    currentMessage.innerHTML = messages.playerWins;
+    playerScoreEl.innerHTML = player.scoreboard;
+    enemyScoreEl.innerHTML = enemy.scoreboard;
+    resetScore();
+  } else if (enemy.scoreboard == 2 && player.scoreboard <= 1) {
+    currentMessage = messages.enemyWins;
+    playerScoreEl.innerHTML = player.scoreboard;
+    enemyScoreEl.innerHTML = enemy.scoreboard;
+    resetScore();
+  } else nextRoundUI()
+
+}
+
+function nextRoundUI() {
+  var nextBtn = document.createElement("button");
+  nextBtn.innerHTML = "Next Round";
+  nextBtn.classList.add("btn", "btn-dark", "btn-lg", "btn-block");
+  nextRound.appendChild(nextBtn);
+  nextBtn.addEventListener("click", startGame);
+  rock.removeEventListener("click", pickRock);
+  paper.removeEventListener("click", pickPaper);
+  scissors.removeEventListener("click", pickScissors);
+  playerScoreEl.innerHTML = player.scoreboard;
+  enemyScoreEl.innerHTML = enemy.scoreboard;
+}
 
 const evaluate = function () {
   const playerVs = player.playerArr[currentRoundData];
@@ -191,50 +210,59 @@ const evaluate = function () {
 
   if (playerVs === enemyVs) {
     currentMessage.innerHTML = messages.draw;
-    nextRoundUI()
+    setTimeout(() => {
+      checkContinue()
+    }, 1000);
 
     // Player win options
   } else if (playerVs === "rock" && enemyVs === "scissors") {
     currentMessage.innerHTML = messages.rockWins;
-    player.scoreboard++
+    player.scoreboard++;
 
-    nextRoundUI()
-
+    setTimeout(() => {
+      checkContinue()
+    }, 1000);
 
   } else if (playerVs === "paper" && enemyVs === "rock") {
     currentMessage.innerHTML = messages.paperWins;
-    player.scoreboard++
+    player.scoreboard++;
 
-    nextRoundUI()
-
+    setTimeout(() => {
+      checkContinue()
+    }, 1000);
 
   } else if (playerVs === "scissors" && enemyVs === "paper") {
     currentMessage.innerHTML = messages.scissorsWin;
-    player.scoreboard++
+    player.scoreboard++;
 
-    nextRoundUI()
-
+    setTimeout(() => {
+      checkContinue()
+    }, 1000);
 
 
     // enemey win options
   } else if (enemyVs === "scissors" && playerVs === "paper") {
     currentMessage.innerHTML = messages.enemyScissorsWin;
-    enemy.scoreboard++
+    enemy.scoreboard++;
 
-    nextRoundUI()
-
+    setTimeout(() => {
+      checkContinue()
+    }, 1000);
 
   } else if (enemyVs === "paper" && playerVs === "rock") {
     currentMessage.innerHTML = messages.enemyPaperWins;
-    enemy.scoreboard++
-    nextRoundUI()
+    enemy.scoreboard++;
+    setTimeout(() => {
+      checkContinue()
+    }, 1000);
 
   } else if (enemyVs === "rock" && playerVs === "scissors") {
     currentMessage.innerHTML = messages.enemyRockWins;
-    enemy.scoreboard++
+    enemy.scoreboard++;
 
-    nextRoundUI()
-
+    setTimeout(() => {
+      checkContinue()
+    }, 1000);
   }
   roundUp();
   console.log(player.playerArr);
