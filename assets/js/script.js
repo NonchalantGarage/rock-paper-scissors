@@ -173,19 +173,23 @@ function resetScore() {
 }
 
 function checkContinue() {
-  if (player.scoreboard == 2 && enemy.scoreboard <= 1) {
-    currentMessage.innerHTML = messages.playerWins;
-    playerScoreEl.innerHTML = player.scoreboard;
-    enemyScoreEl.innerHTML = enemy.scoreboard;
-    resetScore();
-  } else if (enemy.scoreboard == 2 && player.scoreboard <= 1) {
-    currentMessage = messages.enemyWins;
-    playerScoreEl.innerHTML = player.scoreboard;
-    enemyScoreEl.innerHTML = enemy.scoreboard;
-    resetScore();
-  } else nextRoundUI()
-
+  setTimeout(() => {
+    if (player.scoreboard == 2 && enemy.scoreboard <= 1) {
+      currentMessage.innerHTML = messages.playerWins;
+      playerScoreEl.innerHTML = player.scoreboard;
+      enemyScoreEl.innerHTML = enemy.scoreboard;
+      resetScore();
+    } else if (enemy.scoreboard == 2 && player.scoreboard <= 1) {
+      currentMessage = messages.enemyWins;
+      playerScoreEl.innerHTML = player.scoreboard;
+      enemyScoreEl.innerHTML = enemy.scoreboard;
+      resetScore();
+    } else nextRoundUI()
+  
+  
+  }, 2000);
 }
+ 
 
 function nextRoundUI() {
   var nextBtn = document.createElement("button");
