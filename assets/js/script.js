@@ -172,23 +172,7 @@ function resetScore() {
 
 }
 
-function checkContinue() {
-  setTimeout(() => {
-    if (player.scoreboard == 2 && enemy.scoreboard <= 1) {
-      currentMessage.innerHTML = messages.playerWins;
-      playerScoreEl.innerHTML = player.scoreboard;
-      enemyScoreEl.innerHTML = enemy.scoreboard;
-      resetScore();
-    } else if (enemy.scoreboard == 2 && player.scoreboard <= 1) {
-      currentMessage = messages.enemyWins;
-      playerScoreEl.innerHTML = player.scoreboard;
-      enemyScoreEl.innerHTML = enemy.scoreboard;
-      resetScore();
-    } else nextRoundUI()
-  
-  
-  }, 2000);
-}
+
  
 
 function nextRoundUI() {
@@ -214,61 +198,41 @@ const evaluate = function () {
 
   if (playerVs === enemyVs) {
     currentMessage.innerHTML = messages.draw;
-    setTimeout(() => {
-      checkContinue()
-    }, 1000);
-
+ 
     // Player win options
   } else if (playerVs === "rock" && enemyVs === "scissors") {
     currentMessage.innerHTML = messages.rockWins;
     player.scoreboard++;
 
-    setTimeout(() => {
-      checkContinue()
-    }, 1000);
+  
 
   } else if (playerVs === "paper" && enemyVs === "rock") {
     currentMessage.innerHTML = messages.paperWins;
     player.scoreboard++;
 
-    setTimeout(() => {
-      checkContinue()
-    }, 1000);
+
 
   } else if (playerVs === "scissors" && enemyVs === "paper") {
     currentMessage.innerHTML = messages.scissorsWin;
     player.scoreboard++;
-
-    setTimeout(() => {
-      checkContinue()
-    }, 1000);
-
 
     // enemey win options
   } else if (enemyVs === "scissors" && playerVs === "paper") {
     currentMessage.innerHTML = messages.enemyScissorsWin;
     enemy.scoreboard++;
 
-    setTimeout(() => {
-      checkContinue()
-    }, 1000);
-
+  
   } else if (enemyVs === "paper" && playerVs === "rock") {
     currentMessage.innerHTML = messages.enemyPaperWins;
     enemy.scoreboard++;
-    setTimeout(() => {
-      checkContinue()
-    }, 1000);
 
   } else if (enemyVs === "rock" && playerVs === "scissors") {
     currentMessage.innerHTML = messages.enemyRockWins;
     enemy.scoreboard++;
 
-    setTimeout(() => {
-      checkContinue()
-    }, 1000);
   }
   roundUp();
+  nextRoundUI();
   console.log(player.playerArr);
 };
 
